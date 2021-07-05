@@ -23,4 +23,9 @@ public class CategoriaService {
 				", Tipo: " + Categoria.class.getName()));
 				
 	}
+	
+	public Categoria salvar(Categoria categoria) {
+		categoria.setId(null);
+		return categoriaRepo.save(categoria);
+	}
 }
