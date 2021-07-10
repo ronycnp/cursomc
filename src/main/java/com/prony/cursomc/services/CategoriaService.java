@@ -3,10 +3,12 @@ package com.prony.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.prony.cursomc.domain.Categoria;
 import com.prony.cursomc.repositories.CategoriaRepository;
+import com.prony.cursomc.services.exceptions.DataIntegrityException;
 import com.prony.cursomc.services.exceptions.ObjectNotFoundException;
 
 
@@ -32,5 +34,15 @@ public class CategoriaService {
 	public Categoria update(Categoria categoria) {
 		find(categoria.getId());
 		return categoriaRepo.save(categoria);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		
+		try {
+			categoriaRepo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que contém produtos.");
+		}
 	}
 }
