@@ -1,6 +1,8 @@
 package com.prony.cursomc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.prony.cursomc.domain.Categoria;
+import com.prony.cursomc.dto.CategoriaDTO;
 import com.prony.cursomc.services.CategoriaService;
 
 @RestController
@@ -20,6 +23,16 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> listarTodos() {
+		List<Categoria> categorias = categoriaService.findAll();
+		List<CategoriaDTO> categoriasDto = categorias.stream()
+											.map(categoria -> new CategoriaDTO(categoria))
+											.collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(categoriasDto);
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> listar(@PathVariable Integer id) {
