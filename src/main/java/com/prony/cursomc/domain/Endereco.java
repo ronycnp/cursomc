@@ -23,7 +23,7 @@ public class Endereco implements Serializable {
 	private String numero;
 	private String complemento;
 	private String bairro;
-	private String cep; 
+	private String cep;
 	
 	@JsonBackReference
 	@ManyToOne

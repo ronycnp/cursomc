@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.prony.cursomc.domain.Cliente;
 import com.prony.cursomc.dto.ClienteDTO;
+import com.prony.cursomc.dto.ClienteNewDTO;
 import com.prony.cursomc.services.ClienteService;
 
 @RestController
@@ -46,8 +47,8 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteDTO clienteDto) {
-		Cliente cliente = clienteService.fromDTO(clienteDto);
+	public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteNewDTO clienteNewDto) {
+		Cliente cliente = clienteService.fromDTO(clienteNewDto);
 		cliente = clienteService.insert(cliente);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
