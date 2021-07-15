@@ -2,23 +2,43 @@ package com.prony.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.prony.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Size(min = 5, max = 80, message = "O tamanho deve ser entre 5 e 80.")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Email
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String cpfCnpj;
 	private Integer tipo;
 	
 	private Integer cidadeId;
 	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String logradouro;
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String cep;
 	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
