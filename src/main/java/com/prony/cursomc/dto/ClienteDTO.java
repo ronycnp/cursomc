@@ -8,7 +8,9 @@ import javax.validation.constraints.Size;
 
 
 import com.prony.cursomc.domain.Cliente;
+import com.prony.cursomc.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
